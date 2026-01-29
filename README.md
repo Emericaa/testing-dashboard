@@ -10,28 +10,39 @@ Production-grade VC dashboard built with Next.js + Supabase and a BullMQ worker.
 - BullMQ + Redis worker
 
 ## Quick start
-## Prerequisites and setup
-Install the tools you need before running the project.
+## Prerequisites and setup (Debian 13 via terminal)
+Install Git, Docker Engine, and Docker Compose plugin using `apt`.
 
-### Git
-1. Install Git:
-   - Windows: install from the official Git for Windows installer.
-   - macOS: `xcode-select --install` (or install Git via Homebrew).
-   - Linux (Debian/Ubuntu): `sudo apt-get update && sudo apt-get install -y git`
-2. Verify:
-   ```bash
-   git --version
-   ```
+### Git (Debian 13)
+```bash
+sudo apt-get update
+sudo apt-get install -y git
+git --version
+```
 
-### Docker and Docker Compose
-1. Install Docker Desktop (includes Docker Compose):
-   - Windows/macOS: install Docker Desktop and enable WSL2 integration on Windows.
-   - Linux: install Docker Engine + Docker Compose plugin.
-2. Verify:
-   ```bash
-   docker --version
-   docker compose version
-   ```
+### Docker Engine + Docker Compose (Debian 13)
+```bash
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo systemctl enable --now docker
+docker --version
+docker compose version
+```
+
+Optional (run Docker without sudo):
+```bash
+sudo usermod -aG docker $USER
+newgrp docker
+```
 
 ### Get the repository files (GitHub)
 Clone the repository from GitHub and enter the project folder:
