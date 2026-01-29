@@ -30,11 +30,12 @@ export function Sidebar() {
         .select('org_id')
         .eq('id', sessionData.session.user.id)
         .single();
-      if (!profile?.org_id) return;
+      const orgId = (profile as { org_id?: string } | null)?.org_id;
+      if (!orgId) return;
       const { data: settingsAll } = await supabase
         .from('settings')
         .select('branding_json, feature_flags_json')
-        .eq('org_id', profile.org_id)
+        .eq('org_id', orgId)
         .single();
       const branding = settingsAll?.branding_json as Record<string, string> | null;
       const flags = (settingsAll?.feature_flags_json as Record<string, boolean> | null) ?? {};

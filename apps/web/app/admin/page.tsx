@@ -35,9 +35,10 @@ export default function AdminPage() {
       .select('org_id')
       .eq('id', sessionData.session.user.id)
       .single();
-    if (!profile?.org_id) return;
+    const orgId = (profile as { org_id?: string } | null)?.org_id;
+    if (!orgId) return;
 
-    const { data: rows } = await supabase.from('users').select('id, email, role').eq('org_id', profile.org_id);
+    const { data: rows } = await supabase.from('users').select('id, email, role').eq('org_id', orgId);
     setUsers(rows ?? []);
   };
 
@@ -50,9 +51,10 @@ export default function AdminPage() {
       .select('org_id')
       .eq('id', sessionData.session.user.id)
       .single();
-    if (!profile?.org_id) return;
+    const orgId = (profile as { org_id?: string } | null)?.org_id;
+    if (!orgId) return;
 
-    const { data: settings } = await supabase.from('settings').select('*').eq('org_id', profile.org_id).single();
+    const { data: settings } = await supabase.from('settings').select('*').eq('org_id', orgId).single();
     const flags = (settings?.feature_flags_json as Record<string, boolean> | null) ?? {};
     const branding = (settings?.branding_json as Record<string, string> | null) ?? {};
     if (branding['brand-500']) setBrand500(branding['brand-500']);
@@ -151,9 +153,10 @@ export default function AdminPage() {
       .select('org_id')
       .eq('id', sessionData.session.user.id)
       .single();
-    if (!profile?.org_id) return;
+    const orgId = (profile as { org_id?: string } | null)?.org_id;
+    if (!orgId) return;
 
-    const filePath = `${profile.org_id}/logo-${Date.now()}-${logoFile.name}`;
+    const filePath = `${orgId}/logo-${Date.now()}-${logoFile.name}`;
     const { error: uploadError } = await supabase.storage.from('branding').upload(filePath, logoFile, { upsert: true });
     if (uploadError) {
       setStatus(uploadError.message);

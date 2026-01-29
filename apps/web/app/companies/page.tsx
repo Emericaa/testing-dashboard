@@ -41,12 +41,13 @@ export default function CompaniesPage() {
       .select('org_id')
       .eq('id', sessionData.session.user.id)
       .single();
-    if (!profile?.org_id) return;
+    const orgId = (profile as { org_id?: string } | null)?.org_id;
+    if (!orgId) return;
 
     const { data: rows } = await supabase
       .from('companies')
       .select('*')
-      .eq('org_id', profile.org_id)
+      .eq('org_id', orgId)
       .order('created_at', { ascending: false });
 
     const { data: metrics } = await supabase
@@ -86,10 +87,11 @@ export default function CompaniesPage() {
       .select('org_id')
       .eq('id', sessionData.session.user.id)
       .single();
-    if (!profile?.org_id) return;
+    const orgId = (profile as { org_id?: string } | null)?.org_id;
+    if (!orgId) return;
 
     await supabase.from('companies').insert({
-      org_id: profile.org_id,
+      org_id: orgId,
       name: newName,
       sector: newSector || null,
       stage: newStage || null,

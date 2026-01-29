@@ -89,7 +89,7 @@ export default function CompanyDetailPage() {
 
     await supabase.from('company_notes').insert({
       company_id: companyId,
-      org_id: profile?.org_id,
+      org_id: (profile as { org_id?: string } | null)?.org_id ?? null,
       content: noteText
     });
     setNoteText('');

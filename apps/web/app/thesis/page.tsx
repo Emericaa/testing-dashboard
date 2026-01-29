@@ -31,8 +31,9 @@ export default function ThesisPage() {
       .select('org_id')
       .eq('id', sessionData.session.user.id)
       .single();
-    if (!profile?.org_id) return;
-    const { data: rows } = await supabase.from('thesis_docs').select('*').eq('org_id', profile.org_id).order('created_at', { ascending: false });
+    const orgId = (profile as { org_id?: string } | null)?.org_id;
+    if (!orgId) return;
+    const { data: rows } = await supabase.from('thesis_docs').select('*').eq('org_id', orgId).order('created_at', { ascending: false });
     setDocs(rows ?? []);
   };
 

@@ -14,11 +14,12 @@ export function BrandingProvider({ children }: { children: ReactNode }) {
         .select('org_id')
         .eq('id', sessionData.session.user.id)
         .single();
-      if (!profile?.org_id) return;
+      const orgId = (profile as { org_id?: string } | null)?.org_id;
+      if (!orgId) return;
       const { data: settings } = await supabase
         .from('settings')
         .select('branding_json')
-        .eq('org_id', profile.org_id)
+        .eq('org_id', orgId)
         .single();
       if (!settings?.branding_json) return;
       const branding = settings.branding_json as Record<string, string>;

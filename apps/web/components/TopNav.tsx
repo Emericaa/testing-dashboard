@@ -30,11 +30,12 @@ export function TopNav() {
         .select('org_id')
         .eq('id', sessionData.session.user.id)
         .single();
-      if (!profile?.org_id) return;
+      const orgId = (profile as { org_id?: string } | null)?.org_id;
+      if (!orgId) return;
       const { data: settings } = await supabase
         .from('settings')
         .select('feature_flags_json')
-        .eq('org_id', profile.org_id)
+        .eq('org_id', orgId)
         .single();
       const flags = (settings?.feature_flags_json as Record<string, boolean> | null) ?? {};
       setFeatureFlags(flags);
