@@ -20,7 +20,7 @@ async function scheduleJobs() {
   await connectorQueue.add(
     'nightly-sync',
     { connectorType: 'all', orgId: 'all' },
-    { repeat: { cron: '0 2 * * *' } }
+    { repeat: { pattern: '0 2 * * *' } }
   );
   await newsQueue.add(
     'hourly-news',
