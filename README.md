@@ -10,6 +10,36 @@ Production-grade VC dashboard built with Next.js + Supabase and a BullMQ worker.
 - BullMQ + Redis worker
 
 ## Quick start
+## Prerequisites and setup
+Install the tools you need before running the project.
+
+### Git
+1. Install Git:
+   - Windows: install from the official Git for Windows installer.
+   - macOS: `xcode-select --install` (or install Git via Homebrew).
+   - Linux (Debian/Ubuntu): `sudo apt-get update && sudo apt-get install -y git`
+2. Verify:
+   ```bash
+   git --version
+   ```
+
+### Docker and Docker Compose
+1. Install Docker Desktop (includes Docker Compose):
+   - Windows/macOS: install Docker Desktop and enable WSL2 integration on Windows.
+   - Linux: install Docker Engine + Docker Compose plugin.
+2. Verify:
+   ```bash
+   docker --version
+   docker compose version
+   ```
+
+### Get the repository files (GitHub)
+Clone the repository from GitHub and enter the project folder:
+```bash
+git clone <YOUR_GITHUB_REPO_URL>
+cd testing-dashboard
+```
+
 1. Copy env file:
    ```bash
    cp .env.example .env
