@@ -1,5 +1,5 @@
 import { supabaseAdmin } from '../services/supabase';
-import { decryptSecret } from '@vc/shared/src/utils/encryption';
+import { decryptSecret } from '@vc/shared';
 import { CrunchbaseConnector } from './CrunchbaseConnector';
 import { PitchBookConnector } from './PitchBookConnector';
 import { SpectreConnector } from './SpectreConnector';
