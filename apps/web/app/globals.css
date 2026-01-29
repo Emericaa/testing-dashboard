@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-50: 240 245 255;
+  --brand-100: 219 229 248;
+  --brand-500: 43 91 191;
+  --brand-700: 19 54 126;
+  --surface: 247 247 245;
+  --surface-strong: 235 235 232;
+  --ink: 19 23 30;
+  --muted: 95 105 120;
+  --border: 210 214 220;
+  --font-sans: 'IBM Plex Sans';
+  --font-display: 'Space Grotesk';
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle at top left, rgba(230, 235, 250, 0.7), transparent 45%),
+    linear-gradient(180deg, rgba(248, 248, 246, 1) 0%, rgba(242, 243, 245, 1) 100%);
+  color: rgb(var(--ink));
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 1024px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: white;
+  border: 1px solid rgba(var(--border), 0.7);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(18, 24, 40, 0.06);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-risk {
+  background: rgba(239, 68, 68, 0.1);
+  color: rgb(185, 28, 28);
+}
+
+.badge-ok {
+  background: rgba(16, 185, 129, 0.12);
+  color: rgb(4, 120, 87);
+}
