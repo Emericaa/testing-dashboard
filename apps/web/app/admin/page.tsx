@@ -55,8 +55,11 @@ export default function AdminPage() {
     if (!orgId) return;
 
     const { data: settings } = await supabase.from('settings').select('*').eq('org_id', orgId).single();
-    const flags = (settings?.feature_flags_json as Record<string, boolean> | null) ?? {};
-    const branding = (settings?.branding_json as Record<string, string> | null) ?? {};
+    const typedSettings = settings as
+      | { feature_flags_json?: Record<string, boolean> | null; branding_json?: Record<string, string> | null }
+      | null;
+    const flags = typedSettings?.feature_flags_json ?? {};
+    const branding = typedSettings?.branding_json ?? {};
     if (branding['brand-500']) setBrand500(branding['brand-500']);
     if (branding['brand-700']) setBrand700(branding['brand-700']);
     setFeatureNews(flags.FEATURE_NEWS ?? true);
