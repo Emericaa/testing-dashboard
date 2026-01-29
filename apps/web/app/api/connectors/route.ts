@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAuthContext } from '@/lib/supabase/helpers';
 import { createAuthedClient } from '@/lib/supabase/authed';
-import { encryptSecret } from '@vc/shared';
+import { encryptSecret } from '@vc/shared/src/utils/encryption';
 import { env } from '@/lib/env';
 import { log } from '@/lib/logger';
 

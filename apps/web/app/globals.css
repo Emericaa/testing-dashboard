@@ -12,8 +12,8 @@
   --ink: 19 23 30;
   --muted: 95 105 120;
   --border: 210 214 220;
-  --font-sans: 'IBM Plex Sans';
-  --font-display: 'Space Grotesk';
+  --font-sans: 'IBM Plex Sans', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Space Grotesk', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 * {
